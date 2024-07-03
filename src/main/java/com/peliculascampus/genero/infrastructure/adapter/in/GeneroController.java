@@ -28,6 +28,7 @@ public class GeneroController {
             opcion = input.nextInt();
             switch (opcion) {
                 case 1:
+                input.nextLine();
                     Genero genero = new Genero();
                     System.out.println("Ingrese descripcion del genero.");
                     String descripcion = input.nextLine();
@@ -35,14 +36,17 @@ public class GeneroController {
                     generoService.create(genero);
                     break;
                 case 2:
+                    input.nextLine();
                     list();
                     genero = generoService.getById(input.nextInt());
                     System.out.println("Ingrese nueva descripcion del genero.");
+                    input.nextLine();
                     descripcion = input.nextLine();
                     genero.setDescripcion(descripcion);
-                    generoService.create(genero);
+                    generoService.update(genero);
                     break;
                 case 3:
+                input.nextLine();
                     System.out.println("Ingrese el id del genero.");
                     list();
                     int id = input.nextInt();
@@ -50,10 +54,12 @@ public class GeneroController {
                     System.out.println(selectedGenero);
                     break;
                 case 4:
+                input.nextLine();
                     System.out.println("Generos guardados.");
                     list();
                     break;
                 case 5:
+                input.nextLine();
                     System.out.println("Ingrese id");
                     list();
                     id = input.nextInt();
@@ -62,6 +68,7 @@ public class GeneroController {
                     generoService.delete(id);
                     break;
                 case 0:
+                input.nextLine();
                     return;
 
                 default:
@@ -74,4 +81,5 @@ public class GeneroController {
         List<Genero> generos = generoService.getAll();
         generos.forEach(System.out::println);
     }
+
 }

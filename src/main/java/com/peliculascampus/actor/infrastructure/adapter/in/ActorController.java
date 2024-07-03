@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.peliculascampus.actor.application.service.ActorService;
 import com.peliculascampus.actor.domain.Actor;
+import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
 
 /**
  * ActorController
@@ -12,13 +13,13 @@ import com.peliculascampus.actor.domain.Actor;
 public class ActorController {
 
     private ActorService actorService;
-    private NacionalidadController nacionalidadController;
+    // private NacionalidadController nacionalidadController;
     private GeneroController generoController;
     private Scanner input;
 
     public ActorController() {
         this.actorService = new ActorService();
-        this.nacionalidadController = new NacionalidadController();
+        // this.nacionalidadController = new NacionalidadController();
         this.generoController = new GeneroController();
         this.input = new Scanner(System.in);
     }
@@ -44,27 +45,30 @@ public class ActorController {
                     int edad = input.nextInt();
                     actor.setEdad(edad);
                     System.out.println("Igrese id de la nacionalidad.");
-                    nacionalidadController.list();
+                    // nacionalidadController.list();
                     int idNacionalidad = input.nextInt();
+                    actor.setIdNacionalidad(idNacionalidad);
                     System.out.println("Ingrese id del genero.");
                     generoController.list();
                     int idGenero = input.nextInt();
+                    actor.setIdGenero(idGenero);
                     actorService.create(actor);
                     break;
                 case 2:
+                    Actor actor2 = new Actor();
                     System.out.println("Ingrese nuevo  nombre del actor");
                     nombre = input.nextLine();
-                    actor.setNombre(nombre);
-                    System.out.println("Ingrese nuevo edad del actor");
+                    actor2.setNombre(nombre);
+                    System.out.println("Ingrese nuevo edad del actor2");
                     edad = input.nextInt();
-                    actor.setEdad(edad);
+                    actor2.setEdad(edad);
                     System.out.println("Igrese nuevo id de la nacionalidad.");
-                    nacionalidadController.list();
+                    // nacionalidadController.list();
                     idNacionalidad = input.nextInt();
                     System.out.println("Ingrese nuevo  id del genero.");
                     generoController.list();
                     idGenero = input.nextInt();
-                    actorService.update(actor);
+                    actorService.update(actor2);
                     break;
                 case 3:
                     System.out.println("Ingrese el id del actor.");

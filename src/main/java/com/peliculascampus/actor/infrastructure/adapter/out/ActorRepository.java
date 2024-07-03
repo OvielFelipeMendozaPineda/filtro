@@ -16,7 +16,7 @@ public class ActorRepository implements ActorRepositoryPort {
     private String username;
     private String password;
 
-    public ActorRepository(String url, String username, String password) {
+    public ActorRepository() {
         this.url = "jdbc:mysql://localhost:3306/peliculas";
         this.username = "campus2023";
         this.password = "campus2023";
