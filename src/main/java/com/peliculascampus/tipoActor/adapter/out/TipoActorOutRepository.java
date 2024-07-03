@@ -67,7 +67,7 @@ public class TipoActorOutRepository implements TipoActorRepository {
     @Override
     public Optional<TipoActor> buscarPorId(int id) {
         try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String query = "SELECT SELECT id, descripcion s FROM tipoactor WHERE id = ?";
+            String query = "SELECT id, descripcion FROM tipoactor WHERE id = ?";
             try(PreparedStatement stm = conn.prepareStatement(query)){
                 stm.setInt(1, id);
                 ResultSet resultSet = stm.executeQuery();

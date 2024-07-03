@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.peliculascampus.Helpers.Credentials;
 import com.peliculascampus.actor.application.port.out.ActorRepositoryPort;
 import com.peliculascampus.actor.domain.Actor;
+import com.peliculascampus.pelicula.domain.Pelicula;
 
 public class ActorRepository implements ActorRepositoryPort {
     private String url;
@@ -17,9 +19,9 @@ public class ActorRepository implements ActorRepositoryPort {
     private String password;
 
     public ActorRepository() {
-        this.url = "jdbc:mysql://localhost:3306/peliculas";
-        this.username = "campus2023";
-        this.password = "campus2023";
+        this.url = Credentials.url;
+        this.username = Credentials.username;
+        this.password = Credentials.password;
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ActorRepository implements ActorRepositoryPort {
             preparedStatement.setInt(4, actor.getIdGenero());
             preparedStatement.setInt(5, actor.getId());
             preparedStatement.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,6 +115,28 @@ public class ActorRepository implements ActorRepositoryPort {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Actor findByPelicula(Pelicula pelicula) {
+        String query = "SELECT * FROM actor as a INNER JOIN peliculaprotagonista as prot on prot.idprotagonista = a.id INNER JOIN pelicula as p on prot.idpelicula = p.id WHERE p.nombre = ?";
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, pelicula.getNombre());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Actor actor = new Actor();
+                actor.setId(resultSet.getInt("id"));
+                actor.setNombre(resultSet.getString("nombre"));
+                actor.setIdNacionalidad(resultSet.getInt("idnacionalidad"));
+                actor.setEdad(resultSet.getInt("edad"));
+                actor.setIdGenero(resultSet.getInt("idgenero"));
+                return actor;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

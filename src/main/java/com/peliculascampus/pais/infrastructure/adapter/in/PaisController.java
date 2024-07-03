@@ -14,7 +14,7 @@ public class PaisController {
         this.paisService = new PaisService();
         this.input = new Scanner(System.in);
     }
-    public void paisMenu() {
+    public void generoMenu() {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("Gestionar paises");
@@ -80,5 +80,4 @@ public class PaisController {
         List<Pais> paises = paisService.getAll();
         paises.forEach(System.out::println);
     }
-
 }

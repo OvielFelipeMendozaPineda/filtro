@@ -66,7 +66,7 @@ public class FormatoOutAdapter implements FormatoRepository {
     @Override
     public Optional<Formato> buscarPorId(int id) {
         try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String query = "SELECT SELECT id, descripcion s FROM formato WHERE id = ?";
+            String query = "SELECT  id, descripcion  FROM formato WHERE id = ?";
             try(PreparedStatement stm = conn.prepareStatement(query)){
                 stm.setInt(1, id);
                 ResultSet resultSet = stm.executeQuery();

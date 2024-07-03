@@ -1,5 +1,6 @@
 package com.peliculascampus.pelicula.adapter.out;
-
+ 
+import com.peliculascampus.actor.infrastructure.adapter.in.ActorController;
 import com.peliculascampus.pelicula.domain.Pelicula;
 import com.peliculascampus.pelicula.infrastructure.PeliculaRepository;
 
@@ -22,7 +23,7 @@ public class PelicualOutAdapter implements PeliculaRepository {
     @Override
     public void guardar(Pelicula pelicula) {
         try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String query = "INSERT INTO pelicula (codigointerno, nombre, duracion, sinopsis) VALUES(?,?,?,?)";
+            String query = "INSERT INTO pelicula (codinterno, nombre, duracion, sinopsis) VALUES(?,?,?,?)";
             try(PreparedStatement stm = conn.prepareStatement(query)){
                 stm.setString(1, pelicula.getCodigointerno());
                 stm.setString(2, pelicula.getNombre());
@@ -38,7 +39,7 @@ public class PelicualOutAdapter implements PeliculaRepository {
     @Override
     public void actualizar(Pelicula pelicula) {
         try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String query = "UPDATE  pelicula SET  codigointerno = ?, nombre = ?, duracion = ?, sinopsis = ? WHERE id = ?";
+            String query = "UPDATE  pelicula SET  codinterno = ?, nombre = ?, duracion = ?, sinopsis = ? WHERE id = ?";
             try(PreparedStatement stm = conn.prepareStatement(query)){
                 stm.setString(1, pelicula.getCodigointerno());
                 stm.setString(2, pelicula.getNombre());
@@ -100,4 +101,20 @@ public class PelicualOutAdapter implements PeliculaRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void peliculaactor(int idPelicula, int idActor, int idTipoActor){
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+            String query = "INSERT INTO peliculaprotagonista  VALUES (?,?,?)";
+            try(PreparedStatement stm = conn.prepareStatement(query)){
+                stm.setInt(1, idPelicula);
+                stm.setInt(2, idActor);
+                stm.setInt(3, idTipoActor);
+                stm.executeUpdate();
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

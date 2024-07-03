@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.peliculascampus.Helpers.Credentials;
 import com.peliculascampus.genero.application.port.out.GeneroRepositoryPort;
 import com.peliculascampus.genero.domain.Genero;
 
@@ -18,9 +19,9 @@ public class GeneroRepository implements GeneroRepositoryPort {
     private String password;
 
     public GeneroRepository() {
-        this.url = "jdbc:mysql://localhost:3306/peliculas";
-        this.username = "campus2023";
-        this.password = "campus2023";
+        this.url = Credentials.url;
+        this.username = Credentials.username;
+        this.password = Credentials.password;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class GeneroRepository implements GeneroRepositoryPort {
                 genero.setId(resulset.getInt("id"));
                 genero.setDescripcion(resulset.getString("descripcion"));
                 generos.add(genero);
-                
+
             }
             return generos;
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-DROP DATABASE pelicula IF EXISTS;
+DROP DATABASE peliculas IF EXISTS;
 CREATE DATABASE peliculas;
 USE peliculas;
 

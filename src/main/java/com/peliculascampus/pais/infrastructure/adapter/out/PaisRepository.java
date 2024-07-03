@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.peliculascampus.Helpers.Credentials;
 import com.peliculascampus.pais.application.port.out.PaisRepositoryPort;
 import com.peliculascampus.pais.domain.Pais;
 
@@ -17,9 +18,9 @@ public class PaisRepository implements PaisRepositoryPort {
     private String password;
 
     public PaisRepository() {
-        this.url = "jdbc:mysql://localhost:3306/peliculas";
-        this.username = "campus2023";
-        this.password = "campus2023";
+        this.url = Credentials.url;
+        this.username = Credentials.username;
+        this.password = Credentials.password;
     }
 
     @Override
@@ -58,8 +59,8 @@ public class PaisRepository implements PaisRepositoryPort {
     @Override
     public List<Pais> findAll() {
         String query = "SELECT * FROM pais";
-        List <Pais> paises = new ArrayList<>();
-         try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        List<Pais> paises = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
             Statement statement = connection.createStatement();
             ResultSet resulset = statement.executeQuery(query);
             while (resulset.next()) {
@@ -67,7 +68,7 @@ public class PaisRepository implements PaisRepositoryPort {
                 pais.setId(resulset.getInt("id"));
                 pais.setDescription(resulset.getString("descripcion"));
                 paises.add(pais);
-                
+
             }
             return paises;
         } catch (Exception e) {

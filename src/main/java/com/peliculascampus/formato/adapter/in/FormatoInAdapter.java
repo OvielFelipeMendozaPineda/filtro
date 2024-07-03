@@ -3,7 +3,6 @@ package com.peliculascampus.formato.adapter.in;
 import com.peliculascampus.formato.application.FormatoService;
 import com.peliculascampus.formato.domain.Formato;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -31,6 +30,7 @@ public class FormatoInAdapter {
             opcion = input.nextInt();
             switch (opcion) {
                 case 1:
+                input.nextLine();
                     Formato formato = new Formato();
                     System.out.println("Ingrese descripcion del formato.");
                     String descripcion = input.nextLine();
@@ -38,6 +38,7 @@ public class FormatoInAdapter {
                     formatoService.guardarFormato(formato);
                     break;
                 case 2:
+                    input.nextLine();
                     mostrarFormatos();
                     System.out.println("Ingrese el id del formato que quiere actualizar: ");
                     int idf = Integer.parseInt(input.nextLine());
@@ -48,6 +49,7 @@ public class FormatoInAdapter {
                     formatoService.actualizarFormato(formatoGet.get());
                     break;
                 case 3:
+                    input.nextLine();
                     System.out.println("Ingrese el id del formato.");
                     mostrarFormatos();
                     System.out.println("Ingrese el id del formato que quiere buscar: ");
@@ -57,10 +59,12 @@ public class FormatoInAdapter {
                     System.out.println(formatoEncontrado.get());
                     break;
                 case 4:
+                    input.nextLine();
                     System.out.println("Formatos guardados.");
                     mostrarFormatos();
                     break;
                 case 5:
+                    input.nextLine();
                     mostrarFormatos();
                     System.out.println("Ingrese el id del formato que quiere buscar: ");
                     int idfd = Integer.parseInt(input.nextLine());
@@ -68,6 +72,7 @@ public class FormatoInAdapter {
                     System.out.println("Formato eliminado");
                     break;
                 case 0:
+                    input.nextLine();
                     return;
 
                 default:
@@ -78,7 +83,7 @@ public class FormatoInAdapter {
 
     public void mostrarFormatos(){
         System.out.println("Listado de formatos: ");
-        List<Formato> formatos = new ArrayList<>();
+        List<Formato> formatos = formatoService.listarFormatos();
         formatos.forEach(formato -> System.out.println(formato));
     }
 

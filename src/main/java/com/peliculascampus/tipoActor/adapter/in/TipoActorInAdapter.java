@@ -2,9 +2,6 @@ package com.peliculascampus.tipoActor.adapter.in;
 
 import com.peliculascampus.tipoActor.application.TipoActorService;
 import com.peliculascampus.tipoActor.domain.TipoActor;
-import com.peliculascampus.tipoActor.infrastructure.TipoActorRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -33,16 +30,19 @@ public class TipoActorInAdapter {
                 case 1:
                     TipoActor tipoActor = new TipoActor();
                     System.out.println("Ingrese descripcion del tipoActor.");
+                    input.nextLine();
                     String descripcion = input.nextLine();
+
                     tipoActor.setDescripcion(descripcion);
                     tipoActorService.guardarTipoActor(tipoActor);
                     break;
                 case 2:
                     mostrarTipoActors();
                     System.out.println("Ingrese el id del tipoActor que quiere actualizar: ");
-                    int idf = Integer.parseInt(input.nextLine());
+                    int idf = input.nextInt();
                     Optional<TipoActor> tipoActorGet = tipoActorService.buscarTipoActorPorId(idf);
                     System.out.println("Ingrese nueva descripcion del tipoActor.");
+                    input.nextLine();
                     descripcion = input.nextLine();
                     tipoActorGet.get().setDescripcion(descripcion);
                     tipoActorService.actualizarTipoActor(tipoActorGet.get());
@@ -51,7 +51,7 @@ public class TipoActorInAdapter {
                     System.out.println("Ingrese el id del tipoActor.");
                     mostrarTipoActors();
                     System.out.println("Ingrese el id del tipoActor que quiere buscar: ");
-                    int idfb = Integer.parseInt(input.nextLine());
+                    int idfb = input.nextInt();
 
                     Optional<TipoActor> tipoActorEncontrado = tipoActorService.buscarTipoActorPorId(idfb);
                     System.out.println(tipoActorEncontrado.get());
@@ -78,7 +78,7 @@ public class TipoActorInAdapter {
 
     public void mostrarTipoActors(){
         System.out.println("Listado de tipoActors: ");
-        List<TipoActor> tipoActors = new ArrayList<>();
+        List<TipoActor> tipoActors = tipoActorService.listarTipoActor();
         tipoActors.forEach(tipoActor -> System.out.println(tipoActor));
     }
 }

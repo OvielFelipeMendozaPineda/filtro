@@ -12,4 +12,5 @@ public interface PeliculaRepository {
     List<Pelicula> listarTodo();
     Optional<Pelicula> buscarPorId(int id);
     void eliminar(int id);
+    void peliculaactor(int idPelicula, int idActor, int idTipoActor);
 }

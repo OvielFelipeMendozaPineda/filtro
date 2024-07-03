@@ -1,6 +1,8 @@
 package com.peliculascampus.pelicula.adapter.in;
 
 import com.peliculascampus.pelicula.domain.Pelicula;
+import com.peliculascampus.tipoActor.domain.TipoActor;
+import com.peliculascampus.actor.domain.Actor;
 import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
 import com.peliculascampus.pais.infrastructure.adapter.in.PaisController;
 import com.peliculascampus.pelicula.application.PeliculaService;
@@ -29,6 +31,7 @@ public class PeliculaInAdapter {
             System.out.println("3. Buscar pelicula por id.");
             System.out.println("4. Listar todos los peliculaes.");
             System.out.println("5. Eliminar pelicula por id. ");
+            System.out.println("6. Asignar actor a pelicula");
             System.out.println("0. Regresar.");
             opcion = input.nextInt();
             switch (opcion) {
@@ -56,7 +59,7 @@ public class PeliculaInAdapter {
                     peliculas.forEach(peli -> System.out.println(peli));
 
                     System.out.println("Seleccione el ID de la pelicula que queire editar: ");
-                    int idPeli = Integer.parseInt(input.nextLine());
+                    int idPeli = input.nextInt();
 
                     System.out.println("Ingrese nuevo  nombre del pelicula");
                     nombre = input.nextLine();
@@ -83,7 +86,7 @@ public class PeliculaInAdapter {
                     peliculass.forEach(peli -> System.out.println(peli));
 
                     System.out.println("Ingrese el id de la pelicula:");
-                    int id = Integer.parseInt(input.nextLine());
+                    int id = input.nextInt();
 
                     Optional<Pelicula> selectedPelicula = peliculaService.buscarPeliculaPorId(id);
                     System.out.println(selectedPelicula.get());
@@ -102,6 +105,32 @@ public class PeliculaInAdapter {
                     Optional<Pelicula> peliD = peliculaService.buscarPeliculaPorId(id);
                     System.out.println("Se va a eliminar el pelicula: " + peliD.get().getNombre());
                     peliculaService.eliminarPelicula(id);
+                    break;
+                case 6:
+                    System.out.println("Peliculas registradas");
+                    List<Pelicula> peliculas1 =  peliculaService.listarPeliculas();
+                    peliculas1.forEach(peli -> System.out.println(peli));
+                    System.out.println("Seleccione la pelicula por el ID: ");
+                    int idPeliculaSelect = input.nextInt();
+                    Optional<Pelicula> peliSelect = peliculaService.buscarPeliculaPorId(idPeliculaSelect);
+
+                    System.out.println("Listado de actores registrados: ");
+                    List<Actor> actores = peliculaService.listarActores();
+                    actores.forEach(actor -> System.out.println(actor));
+                    System.out.println("Seleccionar el actor por el ID: ");
+                    int idActor = input.nextInt();
+                    Actor actorSelect = peliculaService.obtenerUnActor(idActor);
+                    
+                    System.out.println("Tipos de actores");
+                    input.nextLine();
+                    List<TipoActor> tiposDeActor = peliculaService.listarTipoActor();
+                    tiposDeActor.forEach(tipo -> System.out.println(tipo));
+                    System.out.println("Seleccione el tipo de actor por el ID: ");
+                    int tipoActorId = input.nextInt();
+                    Optional<TipoActor> tipoActorSelect = peliculaService.obtenerUnTA(tipoActorId);
+
+                    peliculaService.peliculaProtagonista(peliSelect.get().getId(), actorSelect.getId(), tipoActorSelect.get().getId());
+
                     break;
                 case 0:
                     return;
