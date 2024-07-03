@@ -2,7 +2,6 @@ package com.peliculascampus.formato.adapter.in;
 
 import com.peliculascampus.formato.application.FormatoService;
 import com.peliculascampus.formato.domain.Formato;
-import com.peliculascampus.genero.domain.Genero;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class FormatoInAdapter {
     }
 
 
-    public void generoMenu() {
+    public void formatoMenu() {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("Gestionar formatos");

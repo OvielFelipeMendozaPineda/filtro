@@ -2,7 +2,6 @@ package com.peliculascampus.formato.infrastructure;
 
 import com.peliculascampus.formato.domain.Formato;
 
-import java.text.Normalizer;
 import java.util.List;
 import java.util.Optional;
 
