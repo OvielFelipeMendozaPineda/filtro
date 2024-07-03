@@ -57,4 +57,15 @@ public class Pelicula {
     public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
     }
+
+    @Override
+    public String toString() {
+        return "Pelicula{" +
+                "id=" + id +
+                ", codigointerno='" + codigointerno + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", duracion='" + duracion + '\'' +
+                ", sinopsis='" + sinopsis + '\'' +
+                '}';
+    }
 }
