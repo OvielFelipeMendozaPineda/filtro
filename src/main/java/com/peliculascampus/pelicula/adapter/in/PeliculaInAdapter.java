@@ -1,21 +1,23 @@
 package com.peliculascampus.pelicula.adapter.in;
 
 import com.peliculascampus.pelicula.domain.Pelicula;
+import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
+import com.peliculascampus.pais.infrastructure.adapter.in.PaisController;
 import com.peliculascampus.pelicula.application.PeliculaService;
-import com.peliculascampus.pelicula.domain.Pelicula;
-import com.peliculascampus.pelicula.infrastructure.PeliculaRepository;
-
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class PeliculaInAdapter {
     private final PeliculaService peliculaService;
+    private PaisController paisController;
+    private GeneroController generoController;
     Scanner input = new Scanner(System.in);
 
     public PeliculaInAdapter(PeliculaService peliculaService) {
         this.peliculaService = peliculaService;
+        this.generoController = new GeneroController();
+        this.paisController = new PaisController();
     }
 
     public void peliculaMenu() {
@@ -49,23 +51,22 @@ public class PeliculaInAdapter {
                     peliculaService.guardarPelicula(pelicula);
                     break;
                 case 2:
-                    System.out.println("Peliculaes registradas");
+                    System.out.println("Peliculas registradas");
                     List<Pelicula> peliculas =  peliculaService.listarPeliculas();
                     peliculas.forEach(peli -> System.out.println(peli));
 
                     System.out.println("Seleccione el ID de la pelicula que queire editar: ");
                     int idPeli = Integer.parseInt(input.nextLine());
 
-
                     System.out.println("Ingrese nuevo  nombre del pelicula");
                     nombre = input.nextLine();
                     System.out.println("Ingrese nuevo codigo interno de la pelicula");
                     codigo = input.nextLine();
                     System.out.println("Igrese nuevo duraciòn de la pelicula: ");
-                    // nacionalidadController.list();
+                    paisController.list();
                     duracion = input.nextLine();
                     System.out.println("Ingrese nuevo  sinapsis de la pelicula.");
-                    // generoController.list();
+                    generoController.list();
                     sinopsis = input.nextLine();
 
                     Pelicula pelicula1Up = new Pelicula();
@@ -73,7 +74,7 @@ public class PeliculaInAdapter {
                     pelicula1Up.setNombre(nombre);
                     pelicula1Up.setDuracion(duracion);
                     pelicula1Up.setSinopsis(sinopsis);
-
+                    pelicula1Up.setId(idPeli);
                     peliculaService.actualizarPelicua(pelicula1Up);
                     break;
                 case 3:
