@@ -28,7 +28,7 @@ CREATE TABLE formato(
 
 CREATE TABLE pelicula(
     id INT AUTO_INCREMENT NOT NULL,
-    codigointerno VARCHAR(5) NOT NULL,
+    codinterno VARCHAR(5) NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     duracion VARCHAR(20) NOT NULL,
     sinopsis TEXT NULL,
