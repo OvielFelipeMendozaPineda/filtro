@@ -12,6 +12,6 @@ public interface ActorRepositoryPort {
     Actor save (Actor actor);
     Actor findById (int id);
     List <Actor> findAll();
-    void update(int id);
+    void update(Actor actor);
     void delete(int id);
 }
