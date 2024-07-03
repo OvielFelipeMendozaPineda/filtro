@@ -44,5 +44,10 @@ public class Actor {
     public void setIdGenero(int idGenero) {
         this.idGenero = idGenero;
     }
+    @Override
+    public String toString() {
+        return "Actor [id=" + id + ", nombre=" + nombre + ", idNacionalidad=" + idNacionalidad + ", edad=" + edad
+                + ", idGenero=" + idGenero + "]";
+    }
     
 }
