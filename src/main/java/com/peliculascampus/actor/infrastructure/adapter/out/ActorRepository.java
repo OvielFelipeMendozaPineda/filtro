@@ -45,8 +45,9 @@ public class ActorRepository implements ActorRepositoryPort {
         String query = "SELECT *  FROM actor WHERE id = ?";
         Actor actor = new Actor();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            Statement statement = connection.createStatement();
-            ResultSet resulset = statement.executeQuery(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resulset = preparedStatement.executeQuery();
             if (resulset.next()) {
                 actor.setId(resulset.getInt("id"));
                 actor.setNombre(resulset.getString("nombre"));

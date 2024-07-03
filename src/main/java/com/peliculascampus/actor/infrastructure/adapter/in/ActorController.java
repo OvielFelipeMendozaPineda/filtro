@@ -13,13 +13,13 @@ import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
 public class ActorController {
 
     private ActorService actorService;
-    // private NacionalidadController nacionalidadController;
+    private PaisController paisController;
     private GeneroController generoController;
     private Scanner input;
 
     public ActorController() {
         this.actorService = new ActorService();
-        // this.nacionalidadController = new NacionalidadController();
+        this.paisController = new PaisController();
         this.generoController = new GeneroController();
         this.input = new Scanner(System.in);
     }
@@ -45,7 +45,7 @@ public class ActorController {
                     int edad = input.nextInt();
                     actor.setEdad(edad);
                     System.out.println("Igrese id de la nacionalidad.");
-                    // nacionalidadController.list();
+                    paisController.list();
                     int idNacionalidad = input.nextInt();
                     actor.setIdNacionalidad(idNacionalidad);
                     System.out.println("Ingrese id del genero.");
@@ -63,7 +63,7 @@ public class ActorController {
                     edad = input.nextInt();
                     actor2.setEdad(edad);
                     System.out.println("Igrese nuevo id de la nacionalidad.");
-                    // nacionalidadController.list();
+                    paisController.list();
                     idNacionalidad = input.nextInt();
                     System.out.println("Ingrese nuevo  id del genero.");
                     generoController.list();
