@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.peliculascampus.actor.application.service.ActorService;
 import com.peliculascampus.actor.domain.Actor;
 import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
+import com.peliculascampus.pais.infrastructure.adapter.in.PaisController;
 
 /**
  * ActorController
