@@ -25,7 +25,7 @@ public class GeneroRepository implements GeneroRepositoryPort {
 
     @Override
     public Genero save(Genero genero) {
-        String query = "INSERT INTO genero VALUES (?)";
+        String query = "INSERT INTO genero VALUES (null, ?)";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, genero.getDescripcion());
@@ -39,10 +39,11 @@ public class GeneroRepository implements GeneroRepositoryPort {
 
     @Override
     public Genero findById(int id) {
-        String query = "SELECT * FROM genero WHERE id = ?";
+        String query = "SELECT * FROM genero WHERE id = ?;";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            Statement statement = connection.createStatement();
-            ResultSet resulset = statement.executeQuery(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resulset = preparedStatement.executeQuery();
             if (resulset.next()) {
                 Genero genero = new Genero();
                 genero.setId(resulset.getInt("id"));
