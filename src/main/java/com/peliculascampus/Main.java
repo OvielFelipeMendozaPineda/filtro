@@ -3,6 +3,7 @@ package com.peliculascampus;
 import java.util.Scanner;
 
 import com.peliculascampus.Helpers.Credentials;
+import com.peliculascampus.Helpers.Validaciones;
 import com.peliculascampus.actor.infrastructure.adapter.in.ActorController;
 import com.peliculascampus.formato.adapter.in.FormatoInAdapter;
 import com.peliculascampus.formato.adapter.out.FormatoOutAdapter;
@@ -22,7 +23,7 @@ public class Main {
     }
 
     public static void mainMenu() {
-
+        Validaciones validar = new Validaciones();
         TipoActorOutRepository tipoActorOutRepository = new TipoActorOutRepository(Credentials.url, Credentials.username, Credentials.password);
         TipoActorService tipoActorService = new TipoActorService(tipoActorOutRepository);
         TipoActorInAdapter tipoActorInAdapter = new TipoActorInAdapter(tipoActorService);
@@ -36,19 +37,22 @@ public class Main {
         FormatoService formatoService = new FormatoService(formatoOutAdapter);
         FormatoInAdapter formatoInAdapter = new FormatoInAdapter(formatoService);
         final Scanner input = new Scanner(System.in);
-        int opcion = -1;
-        while (opcion != 0) {
-            System.out.println("Peliculas campus");
-            System.out.println("1. Menu paises");
-            System.out.println("2. Menu generos");
-            System.out.println("3. formatos");
-            System.out.println("4. Tipos de actores");
-            System.out.println("5. Menu peliculas");
-            System.out.println("6. Menu actores");
-            switch (input.nextInt()) {
+
+        menuPrincipal: while (true) {
+            System.out.println("Bienvenido a Peliculas Campus");
+            System.out.println("============================");
+            System.out.println("1. Menu Países");
+            System.out.println("2. Menu Géneros");
+            System.out.println("3. Formatos de Película");
+            System.out.println("4. Tipos de Actores");
+            System.out.println("5. Menu Películas");
+            System.out.println("6. Menu Actores");
+            System.out.println("0. Salir");
+            int opcion = validar.readInt("Seleccione una opcion: ");
+            switch (opcion) {
                 case 1:
                     PaisController paisController = new PaisController();
-                    paisController.generoMenu();
+                    paisController.paisMenu();
                     break;
                 case 2:
                     GeneroController generoController = new GeneroController();
@@ -68,8 +72,10 @@ public class Main {
                     actorController.actorMenu();
                     break;
                 case 0:
-                    return;
+                    break menuPrincipal;
                 default:
+                    System.out.println("--------La opcion seleccionada no existe --------");
+                    System.out.println();
                     break;
             }
         }

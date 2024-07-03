@@ -22,7 +22,10 @@ public class Genero {
     }
     @Override
     public String toString() {
-        return "Genero [id=" + id + ", descripcion=" + descripcion + "]";
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Description: " + descripcion;
     }
     
 }

@@ -1,6 +1,7 @@
-DROP DATABASE peliculas IF EXISTS;
-CREATE DATABASE peliculas;
-USE peliculas;
+DROP DATABASE IF EXISTS cinecampus;
+
+CREATE DATABASE cinecampus;
+USE cinecampus;
 
 CREATE TABLE tipoactor(
     id INT AUTO_INCREMENT NOT NULL,

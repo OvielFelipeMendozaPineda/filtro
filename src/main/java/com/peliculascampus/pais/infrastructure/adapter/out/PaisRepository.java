@@ -92,7 +92,7 @@ public class PaisRepository implements PaisRepositoryPort {
 
     @Override
     public void delete(int id) {
-        String query = "DELETE FROM genro WHERE id = ?";
+        String query = "DELETE FROM pais WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);

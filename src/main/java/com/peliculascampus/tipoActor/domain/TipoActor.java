@@ -30,9 +30,9 @@ public class TipoActor {
 
     @Override
     public String toString() {
-        return "TipoActor{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Descripcion: " + descripcion;
     }
 }

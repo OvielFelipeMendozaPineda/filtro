@@ -30,9 +30,9 @@ public class Formato {
 
     @Override
     public String toString() {
-        return "Formato{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Nombre: " + nombre;
     }
 }

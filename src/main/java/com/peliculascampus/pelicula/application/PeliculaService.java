@@ -42,7 +42,7 @@ public class PeliculaService {
     }
 
     public void peliculaProtagonista(int idPelicula, int idActor, int idTA){
-        this.peliculaRepository.peliculaactor(idPelicula, idActor, idActor);
+        this.peliculaRepository.peliculaactor(idPelicula, idActor, idTA);
     }
 
     public List<Actor> listarActores(){

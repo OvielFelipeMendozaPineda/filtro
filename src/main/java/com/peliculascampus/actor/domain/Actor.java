@@ -46,8 +46,13 @@ public class Actor {
     }
     @Override
     public String toString() {
-        return "Actor [id=" + id + ", nombre=" + nombre + ", idNacionalidad=" + idNacionalidad + ", edad=" + edad
-                + ", idGenero=" + idGenero + "]";
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Nombre: " + nombre + "\n" +
+                "ID Nacionalidad: " + idNacionalidad + "\n" +
+                "Edad: " + edad + "\n" +
+                "ID Género: " + idGenero;
     }
     
 }

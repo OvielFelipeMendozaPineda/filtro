@@ -1,5 +1,6 @@
 package com.peliculascampus.formato.adapter.in;
 
+import com.peliculascampus.Helpers.Validaciones;
 import com.peliculascampus.formato.application.FormatoService;
 import com.peliculascampus.formato.domain.Formato;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class FormatoInAdapter {
 
     private final FormatoService formatoService;
-    Scanner input = new Scanner(System.in);
+    Validaciones validar = new Validaciones();
 
     public FormatoInAdapter(FormatoService formatoService) {
         this.formatoService = formatoService;
@@ -18,8 +19,7 @@ public class FormatoInAdapter {
 
 
     public void formatoMenu() {
-        int opcion = -1;
-        while (opcion != 0) {
+        menuformato: while (true) {
             System.out.println("Gestionar formatos");
             System.out.println("1. Crear formato");
             System.out.println("2. Editar formato");
@@ -27,55 +27,48 @@ public class FormatoInAdapter {
             System.out.println("4. Listar todos los formatos.");
             System.out.println("5. Eliminar formato por id. ");
             System.out.println("0. Regresar.");
-            opcion = input.nextInt();
+            int opcion = validar.readInt("Seleccione una opcion: ");
             switch (opcion) {
                 case 1:
-                input.nextLine();
                     Formato formato = new Formato();
-                    System.out.println("Ingrese descripcion del formato.");
-                    String descripcion = input.nextLine();
+                    String descripcion = validar.stringNotNull("Ingrese descripcion del formato: ");
                     formato.setNombre(descripcion);
                     formatoService.guardarFormato(formato);
                     break;
                 case 2:
-                    input.nextLine();
                     mostrarFormatos();
-                    System.out.println("Ingrese el id del formato que quiere actualizar: ");
-                    int idf = Integer.parseInt(input.nextLine());
-                    Optional<Formato> formatoGet = formatoService.buscarFormatoPorId(idf);
-                    System.out.println("Ingrese nueva descripcion del formato.");
-                    descripcion = input.nextLine();
-                    formatoGet.get().setNombre(descripcion);
-                    formatoService.actualizarFormato(formatoGet.get());
+                    Formato form = validar.transformAndValidateObj(
+                            () -> formatoService.buscarFormatoPorId(validar.readInt("Ingrese el id del formato a actualizar:"))
+                    );
+                    descripcion = validar.stringNotNull("Ingrese nueva descripcion del formato: ");
+                    Formato newFormat = new Formato();
+                    newFormat.setNombre(descripcion);
+                    newFormat.setId(form.getId());
+                    formatoService.actualizarFormato(newFormat);
                     break;
                 case 3:
-                    input.nextLine();
                     System.out.println("Ingrese el id del formato.");
                     mostrarFormatos();
-                    System.out.println("Ingrese el id del formato que quiere buscar: ");
-                    int idfb = Integer.parseInt(input.nextLine());
+                    int idfb = validar.readInt("Ingrese el id del formato que quiere buscar: ");
 
                     Optional<Formato> formatoEncontrado = formatoService.buscarFormatoPorId(idfb);
                     System.out.println(formatoEncontrado.get());
+                    System.out.println();
                     break;
                 case 4:
-                    input.nextLine();
-                    System.out.println("Formatos guardados.");
+                    System.out.println("Formatos guardados:");
                     mostrarFormatos();
                     break;
                 case 5:
-                    input.nextLine();
                     mostrarFormatos();
-                    System.out.println("Ingrese el id del formato que quiere buscar: ");
-                    int idfd = Integer.parseInt(input.nextLine());
+                    int idfd = validar.readInt("Ingrese el id del formato que quiere buscar: ");
                     formatoService.eliminarFormato(idfd);
                     System.out.println("Formato eliminado");
                     break;
                 case 0:
-                    input.nextLine();
-                    return;
-
+                    break menuformato;
                 default:
+                    System.out.println("----- La opcion seleccionada no existe -----");
                     break;
             }
         }
@@ -85,6 +78,7 @@ public class FormatoInAdapter {
         System.out.println("Listado de formatos: ");
         List<Formato> formatos = formatoService.listarFormatos();
         formatos.forEach(formato -> System.out.println(formato));
+        System.out.println();
     }
 
 

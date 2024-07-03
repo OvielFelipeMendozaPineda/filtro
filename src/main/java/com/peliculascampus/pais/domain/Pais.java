@@ -22,7 +22,10 @@ public class Pais {
     }
     @Override
     public String toString() {
-        return "Pais [id=" + id + ", description=" + description + "]";
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Description: " + description + "\n";
     }
     
 }

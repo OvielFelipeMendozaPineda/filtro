@@ -60,12 +60,12 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{" +
-                "id=" + id +
-                ", codigointerno='" + codigointerno + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", duracion='" + duracion + '\'' +
-                ", sinopsis='" + sinopsis + '\'' +
-                '}';
+        String border = "====================";
+        return border + "\n" +
+                "ID: " + id + "\n" +
+                "Codigo Interno: " + codigointerno + "\n" +
+                "Nombre: " + nombre + "\n" +
+                "Duración: " + duracion + "\n" +
+                "Sinopsis: " + sinopsis;
     }
 }
