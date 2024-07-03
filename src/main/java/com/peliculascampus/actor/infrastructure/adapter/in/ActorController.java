@@ -44,10 +44,10 @@ public class ActorController {
                     int edad = input.nextInt();
                     actor.setEdad(edad);
                     System.out.println("Igrese id de la nacionalidad.");
-                    // nacionalidadController.list();
+                    nacionalidadController.list();
                     int idNacionalidad = input.nextInt();
                     System.out.println("Ingrese id del genero.");
-                    // generoController.list();
+                    generoController.list();
                     int idGenero = input.nextInt();
                     actorService.create(actor);
                     break;
@@ -59,10 +59,10 @@ public class ActorController {
                     edad = input.nextInt();
                     actor.setEdad(edad);
                     System.out.println("Igrese nuevo id de la nacionalidad.");
-                    // nacionalidadController.list();
+                    nacionalidadController.list();
                     idNacionalidad = input.nextInt();
                     System.out.println("Ingrese nuevo  id del genero.");
-                    // generoController.list();
+                    generoController.list();
                     idGenero = input.nextInt();
                     actorService.update(actor);
                     break;
