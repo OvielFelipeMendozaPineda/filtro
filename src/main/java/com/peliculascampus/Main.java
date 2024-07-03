@@ -1,11 +1,12 @@
 package com.peliculascampus;
 
-import com.peliculascampus.genero.infrastructure.adapter.in.GeneroController;
+import com.peliculascampus.actor.infrastructure.adapter.in.ActorController;
+import com.peliculascampus.pais.infrastructure.adapter.in.PaisController;
 
 public class Main {
     public static void main(String[] args) {
         
-        GeneroController controller = new GeneroController();
-        controller.generoMenu();
+        ActorController controller = new ActorController();
+        controller.actorMenu();
     }
 }

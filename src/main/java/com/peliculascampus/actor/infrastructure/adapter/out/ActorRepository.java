@@ -24,7 +24,7 @@ public class ActorRepository implements ActorRepositoryPort {
 
     @Override
     public Actor save(Actor actor) {
-        String query = "INSERT INTO actor VALUES (?,?,?,?)";
+        String query = "INSERT INTO actor VALUES (null, ?,?,?,?)";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, actor.getNombre());
@@ -88,7 +88,7 @@ public class ActorRepository implements ActorRepositoryPort {
 
     @Override
     public void update(Actor actor) {
-        String query = "UPDATE actor set nombre = ?, set idnacionalidad = ?, set edad = ?, set idgenero = ? WHERE id = ? ";
+        String query = "UPDATE actor set nombre = ?, idnacionalidad = ?, edad = ?, idgenero = ? WHERE id = ? ";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, actor.getNombre());
@@ -105,11 +105,11 @@ public class ActorRepository implements ActorRepositoryPort {
 
     @Override
     public void delete(int id) {
-        String query = "DELETE FROM WHERE id = ?";
+        String query = "DELETE FROM actor WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
-            preparedStatement.execute(query);
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
