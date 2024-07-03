@@ -35,7 +35,7 @@ public class TipoActorOutRepository implements TipoActorRepository {
     @Override
     public void actalizar(TipoActor tipoActor) {
         try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String query = "UPDATE  tipoactor SET  descripcion =?  WHERE id = ?";
+            String query = "UPDATE  tipoactor SET  descripcion = ?  WHERE id = ?";
             try(PreparedStatement stm = conn.prepareStatement(query)){
                 stm.setString(1, tipoActor.getDescripcion());
                 stm.setInt(2, tipoActor.getId());

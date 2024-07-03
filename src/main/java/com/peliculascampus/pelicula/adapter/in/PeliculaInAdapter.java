@@ -73,6 +73,7 @@ public class PeliculaInAdapter {
                     pelicula1Up.setNombre(nombre);
                     pelicula1Up.setDuracion(duracion);
                     pelicula1Up.setSinopsis(sinopsis);
+
                     peliculaService.actualizarPelicua(pelicula1Up);
                     break;
                 case 3:
