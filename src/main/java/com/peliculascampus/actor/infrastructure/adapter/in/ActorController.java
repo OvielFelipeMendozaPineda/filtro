@@ -38,6 +38,7 @@ public class ActorController {
             opcion = input.nextInt();
             switch (opcion) {
                 case 1:
+                    input.nextLine();
                     Actor actor = new Actor();
                     System.out.println("Ingrese nombre del actor");
                     String nombre = input.nextLine();
@@ -56,7 +57,11 @@ public class ActorController {
                     actorService.create(actor);
                     break;
                 case 2:
-                    Actor actor2 = new Actor();
+                    input.nextLine();
+                    list();
+                    System.out.println("Ingrese el id");
+                    Actor actor2 = actorService.getById(input.nextInt());
+                    input.nextLine();
                     System.out.println("Ingrese nuevo  nombre del actor");
                     nombre = input.nextLine();
                     actor2.setNombre(nombre);
@@ -72,6 +77,7 @@ public class ActorController {
                     actorService.update(actor2);
                     break;
                 case 3:
+                    input.nextLine();
                     System.out.println("Ingrese el id del actor.");
                     list();
                     int id = input.nextInt();
@@ -79,10 +85,12 @@ public class ActorController {
                     System.out.println(selectedActor);
                     break;
                 case 4:
+                    input.nextLine();
                     System.out.println("Actores guardados.");
                     list();
                     break;
                 case 5:
+                    input.nextLine();
                     System.out.println("Ingrese id");
                     list();
                     id = input.nextInt();
@@ -91,6 +99,7 @@ public class ActorController {
                     actorService.delete(id);
                     break;
                 case 0:
+                    input.nextLine();
                     return;
 
                 default:
@@ -98,6 +107,7 @@ public class ActorController {
             }
         }
     }
+
     public void list() {
         List<Actor> actores = actorService.getAll();
         actores.forEach(System.out::println);

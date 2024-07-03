@@ -14,7 +14,7 @@ public class PaisController {
         this.paisService = new PaisService();
         this.input = new Scanner(System.in);
     }
-    public void generoMenu() {
+    public void paisMenu() {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("Gestionar paises");
